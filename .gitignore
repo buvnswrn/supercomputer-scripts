@@ -2,3 +2,11 @@
 *.txt
 *.out
 *.err
+*.sif
+*.cache
+data/
+*-venv/
+*.img
+Llama3/
+mistral/
+*/
