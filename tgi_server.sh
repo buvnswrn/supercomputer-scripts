@@ -18,7 +18,7 @@ export NUMBA_DEBUG_CACHE=1
 export NCCL_DEBUG=INFO
 
 MODEL_REPO="google/gemma-2-2b-it"
-HF_TOKEN="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"
+HF_TOKEN=$(cat ~/hf_auth.env)
 APPTAINER="apptainer run --nvccli -B ./data/:/data -B ${PWD} --env HF_TOKEN=$HF_TOKEN "
 CONTAINER="text-generation-inference_2.2.0.sif"
 TGI="--port 8080 --model-id $MODEL_REPO --num-shard=1 --max-input-length 5000 --max-total-tokens 15000"

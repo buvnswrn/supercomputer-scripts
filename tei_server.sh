@@ -20,7 +20,7 @@ export NCCL_DEBUG=INFO
 
 
 MODEL_REPO="BAAI/bge-large-en-v1.5"
-HF_TOKEN="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"
+HF_TOKEN=$(cat ~/hf_auth.env)
 APPTAINER="apptainer run --nvccli -B ./data/:/data --env HF_TOKEN=$HF_TOKEN "
 CONTAINER="text-embeddings-inference_1.5.sif"
 TEI="--port 8080 --model-id $MODEL_REPO"
