@@ -1,13 +1,16 @@
 #!/bin/bash -l
 #SBATCH -A p200512
-#SBATCH -q dev
+#SBATCH -q default
 #SBATCH -p gpu
-#SBATCH --res gpudev
 #SBATCH -t 2:0:0
 #SBATCH -N 1
-#SBATCH --gpus-per-task=4
+#SBATCH -n 1
+#SBATCH --gpus-per-node=4
+#SBATCH --ntasks-per-node=1
 #SBATCH --error="tgi-%j.err"
 #SBATCH --output="tgi-%j.out"
+#SBATCH --mem=90G
+
 
 export PMIX_MCA_psec=native
 export NUMBA_CACHE_DIR=/tmp
