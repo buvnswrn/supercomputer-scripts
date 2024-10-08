@@ -22,7 +22,7 @@ NODE_IP=$(hostname --ip-address)
 MODEL_REPO="Alibaba-NLP/gte-Qwen2-7B-instruct"
 TGI_SERVER_IP=$(cat ~/tgi_server_ip.env)
 echo "TGI Server is at: $TGI_SERVER_IP"
-CLUSTER_REGISTER_ENDPOINT="http://$TGI_SERVER_IP:8000/api/v1/other_services/register_cluster"
+CLUSTER_REGISTER_ENDPOINT="http://$TGI_SERVER_IP:8000/other_services/api/v1/register_cluster"
 echo "Registering Server at $CLUSTER_REGISTER_ENDPOINT"
 
 HF_TOKEN=$(cat ~/hf_auth.env)
