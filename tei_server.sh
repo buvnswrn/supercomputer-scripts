@@ -19,7 +19,15 @@ export NCCL_DEBUG=INFO
 NODE_IP=$(hostname --ip-address)
 
 
-MODEL_REPO="Alibaba-NLP/gte-Qwen2-7B-instruct"
+#MODEL_REPO="Alibaba-NLP/gte-Qwen2-7B-instruct"
+MODEL_REPO="jinaai/jina-embeddings-v2-base-de"
+#MODEL_REPO="Alibaba-NLP/gte-multilingual-base"
+#revision="refs/pr/7"
+#MODEL_REPO="sentence-transformers/LaBSE"
+#MODEL_REPO="Salesforce/SFR-Embedding-Mistral"
+#MODEL_REPO="intfloat/multilingual-e5-large-instruct"
+#MODEL_REPO="jinaai/jina-embeddings-v3"
+
 TGI_SERVER_IP=$(cat ~/tgi_server_ip.env)
 echo "TGI Server is at: $TGI_SERVER_IP"
 CLUSTER_REGISTER_ENDPOINT="http://$TGI_SERVER_IP:8000/other_services/api/v1/register_cluster"
@@ -29,6 +37,7 @@ HF_TOKEN=$(cat ~/hf_auth.env)
 APPTAINER="apptainer run --nvccli -B ./data/:/data --env HF_TOKEN=$HF_TOKEN "
 CONTAINER="text-embeddings-inference_1.5.sif"
 TEI="--port 8080 --model-id $MODEL_REPO"
+#TEI="--port 8080 --model-id $MODEL_REPO --revision=$revision"
 
 #echo "Using dynamic port: $PORT"
 echo "HEAD NODE: $(hostname)"
