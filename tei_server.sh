@@ -20,9 +20,9 @@ NODE_IP=$(hostname --ip-address)
 
 
 #MODEL_REPO="Alibaba-NLP/gte-Qwen2-7B-instruct"
-MODEL_REPO="jinaai/jina-embeddings-v2-base-de"
-#MODEL_REPO="Alibaba-NLP/gte-multilingual-base"
-#revision="refs/pr/7"
+#MODEL_REPO="jinaai/jina-embeddings-v2-base-de"
+MODEL_REPO="Alibaba-NLP/gte-multilingual-base"
+revision="refs/pr/7"
 #MODEL_REPO="sentence-transformers/LaBSE"
 #MODEL_REPO="Salesforce/SFR-Embedding-Mistral"
 #MODEL_REPO="intfloat/multilingual-e5-large-instruct"
@@ -36,14 +36,14 @@ echo "Registering Server at $CLUSTER_REGISTER_ENDPOINT"
 HF_TOKEN=$(cat ~/hf_auth.env)
 APPTAINER="apptainer run --nvccli -B ./data/:/data --env HF_TOKEN=$HF_TOKEN "
 CONTAINER="text-embeddings-inference_1.5.sif"
-TEI="--port 8080 --model-id $MODEL_REPO"
-#TEI="--port 8080 --model-id $MODEL_REPO --revision=$revision"
+#TEI="--port 8080 --model-id $MODEL_REPO"
+TEI="--port 8080 --model-id $MODEL_REPO --revision=$revision"
 
 #echo "Using dynamic port: $PORT"
 echo "HEAD NODE: $(hostname)"
 echo "IP ADDRESS: $(hostname --ip-address)"
 #echo "Using port: $NODE_PORT on node $SLURM_NODEID"
 echo "SSH TUNNEL (HTTP): ssh -p 8822 ${USER}@login.lxp.lu -NL 8002:$(hostname --ip-address):8080"
-curl -X POST "$CLUSTER_REGISTER_ENDPOINT?ip=$NODE_IP"
+curl -X POST "$CLUSTER_REGISTER_ENDPOINT?ip=$NODE_IP&key=EMBEDDING_SERVER_IP"
 
 srun ${APPTAINER} ${CONTAINER} ${TEI}
